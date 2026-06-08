@@ -175,13 +175,8 @@ class Spiel {
     - heimTeam: Mannschaft
     - auswaertsTeam: Mannschaft
     - ergebnis: String
-    - quoten: List<Wettquote>
+    - quoten: Map<string, double>
     + setErgebnis(score: String): void
-}
-
-class Wettquote {
-    - typ: string
-    - wert: double
 }
 
 class Benutzer {
@@ -203,7 +198,6 @@ TurnierManager "1" --> "*" Benutzer
 Turnier "1" *-- "*" Gruppe
 Gruppe "1" *-- "*" Mannschaft
 Spiel "*" --> "2" Mannschaft : teilnehmend
-Spiel "1" *-- "*" Wettquote
 Benutzer "1" -- "*" Wette
 Wette "*" --> "1" Spiel
 
