@@ -19,7 +19,7 @@ tags: [Sommersemester2026, Softwareentwicklung, Übung05]
 
 -->
 
-[![LiaScript Course](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/Ifi-Softwareentwicklung-SoSe2026/exercise_05/refs/heads/main/README.md)
+[![LiaScript Course](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/Ifi-Softwareentwicklung-SoSe2026/exercise-05-Kopfkissenderwahre/refs/heads/main/README.md)
 
 # Aufgabe 05
 
@@ -136,4 +136,77 @@ Kevin ersetzt den folgenden Platzhalter mit einem LiaScript-kompatiblen PlantUML
 - [plantUml Editor](https://pantuml.com)
 - paste and copy your code! Mit Reloads verlieren Sie Ihre Eingaben, daher vorher sichern!
 
-<!-- kevin:uml-diagram -->
+<!-- kevin-uml:start -->
+```text @plantUML
+@startuml
+skinparam classAttributeIconSize 0
+
+class TurnierManager {
+    - turniertabelle: Turnier
+    - benutzerListe: List<Benutzer>
+    + saveToJson(filePath: string): void
+    + loadFromJson(filePath: string): void
+    + initializeTurnier(): void
+    + printSpiele(): void
+    + setQuote(spielId: int, typ: string, quote: double): void
+    + getQuote(spielId: int, typ: string): double
+    + placeBid(playerName: string, spielId: int, typ: string, amount: double): void
+    + setResult(spielId: int, score: string): void
+}
+
+class Turnier {
+    - gruppen: List<Gruppe>
+    + getSpielById(id: int): Spiel
+    + getAllSpiele(): List<Spiel>
+}
+
+class Gruppe {
+    - name: string
+    - teams: List<Mannschaft>
+}
+
+class Mannschaft {
+    - name: string
+}
+
+class Spiel {
+    - id: int
+    - datum: DateTime
+    - heimTeam: Mannschaft
+    - auswaertsTeam: Mannschaft
+    - ergebnis: String
+    - quoten: List<Wettquote>
+    + setErgebnis(score: String): void
+}
+
+class Wettquote {
+    - typ: string
+    - wert: double
+}
+
+class Benutzer {
+    - name: string
+    - guthaben: double
+    + updateBalance(amount: double): void
+}
+
+class Wette {
+    - typ: string
+    - quote: double
+    - einsatz: double
+    - istAusgewertet: boolean
+}
+
+TurnierManager "1" --> "1" Turnier
+TurnierManager "1" --> "*" Benutzer
+Turnier "1" *-- "*" Gruppe
+Gruppe "1" *-- "*" Mannschaft
+Spiel "*" --> "2" Mannschaft : teilnehmend
+Spiel "1" *-- "*" Wettquote
+Benutzer "1" -- "*" Wette
+Wette "*" --> "1" Spiel
+
+@enduml
+```
+@plantUML.eval(png)
+<!-- kevin-uml:end -->
