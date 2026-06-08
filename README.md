@@ -192,9 +192,10 @@ class Benutzer {
 
 class Wette {
     - typ: string
-    - wettquote: Wettquote
+    - quote: double
     - einsatz: double
     - istAusgewertet: boolean
+    - spiel: Spiel
 }
 
 TurnierManager "1" --> "1" Turnier
@@ -205,7 +206,6 @@ Spiel "*" --> "2" Mannschaft : teilnehmend
 Spiel "1" *-- "*" Wettquote
 Benutzer "1" -- "*" Wette
 Wette "*" --> "1" Spiel
-Wette "*" --> "1" Wettquote : referenziert
 
 @enduml
 ```
