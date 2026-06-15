@@ -40,11 +40,11 @@ public class Program
 
 public class Turniermanager
 {
-    private Turnier turniertabelle;
+    private Turnier turniertabelle {get; set;}
     private List<Benutzer> benutzerliste;
     public void saveToJson(string filepath)
     {
-        var json = JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true });
+        var json = JsonSerializer.Serialize(this.turniertabelle, new JsonSerializerOptions { WriteIndented = true });
         File.WriteAllText(filepath, json);
     }
     public void loadFromJson(string filepath)
@@ -73,7 +73,7 @@ public class Turniermanager
 
 public class Turnier
 {
-    private List<Gruppe> gruppen;
+    private List<Gruppe> gruppen {get; set;}
     public Spiel getSpielbyId(int id)
     {
         return gruppen.SelectMany(g => g.teams)
@@ -90,7 +90,7 @@ public class Turnier
 public class Gruppe
 {
     private string name;
-    private List<Mannschaft> teams;
+    private List<Mannschaft> teams {get; set;}
 }
 public class Mannschaft
 {
