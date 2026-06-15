@@ -89,12 +89,12 @@ public class Turnier
 }
 public class Gruppe
 {
-    private string name;
+    private string name {get; set;}
     private List<Mannschaft> teams {get; set;}
 }
 public class Mannschaft
 {
-    private string name;
+    private string name {get; set;}
 }
 class Spiel
 {
@@ -108,15 +108,15 @@ class Spiel
 }
 class Benutzer
 {
-    private string name;
-    private double guthaben;
+    private string name {get; set;}
+    private double guthaben {get; set;}
     public void updateBalance(double amount);
 }
 class Wette
 {
-    private string typ;
-    private double quote;
-    private double einsatz;
-    private Boolean istAusgewertet;
+    private string typ {get; set;}
+    private double quote {get; set;}
+    private double einsatz {get; set;}
+    private Boolean istAusgewertet {get; set;}
     private Spiel spiel;
 }
