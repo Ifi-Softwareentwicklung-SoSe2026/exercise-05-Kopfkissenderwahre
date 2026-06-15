@@ -7,14 +7,15 @@ public class Program
 {
     public static void Main(string[] args)
     {
+        Turniermanager manager = new Turniermanager();
         if (args[0].ToLower() == "new")
         {
             // intitialisiert Turniertabelle
-            initializeTurnier();
+            manager.initializeTurnier();
 
         } else if (args[0].ToLower() == "print") 
         {
-            printSpiele();
+            manager.printSpiele();
             
         } else if (args[0].ToLower() == "set")
         {
@@ -30,7 +31,7 @@ public class Program
             
         } else if (args.Length == 0)
         {
-            initializeTurnier();
+            manager.initializeTurnier();
             printSpiele();
         }
 
@@ -75,9 +76,16 @@ public class Turnier
     private List<Gruppe> gruppen;
     public getSpielbyId(int id)
     {
-        
+        return gruppen.SelectMany(g => g.teams)
+                      .SelectMany(t => t.spiele)
+                      .FirstOrDefault(s => s.id == id);
     }
-    public GetAlleSpiele();
+    public GetAlleSpiele()
+    {
+        return gruppen.SelectMany(g => g.teams)
+                      .SelectMany(t => t.spiele)
+                      .ToList();
+    }
 }
 public class Gruppe
 {
