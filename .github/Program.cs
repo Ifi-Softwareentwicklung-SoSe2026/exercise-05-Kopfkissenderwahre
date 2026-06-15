@@ -49,6 +49,7 @@ public class Turniermanager
     public void initializeTurnier()
     {
         
+        
     }
     public void printSpiele()
     {
