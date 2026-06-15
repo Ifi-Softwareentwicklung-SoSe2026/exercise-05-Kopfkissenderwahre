@@ -104,7 +104,10 @@ class Spiel
     private Mannschaft auswaertsTeam {get; set;}
     private string ergebnis {get; set;}
     private Dictionary<string, double> quoten {get; set;}
-    public void setErgebnis(string score);
+    public void setErgebnis(string score)
+    {
+        this.ergebnis = score;
+    }
 }
 class Benutzer
 {
