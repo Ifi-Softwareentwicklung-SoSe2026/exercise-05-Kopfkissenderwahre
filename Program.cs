@@ -10,8 +10,11 @@ public class Program
         if (args[0].ToLower() == "new")
         {
             // intitialisiert Turniertabelle
-        } else if (args[0].ToLower() == "print")
+            initializeTurnier();
+
+        } else if (args[0].ToLower() == "print") 
         {
+            printSpiele();
             
         } else if (args[0].ToLower() == "set")
         {
@@ -25,9 +28,10 @@ public class Program
         } else if (args[0].ToLower() == "result")
         {
             
-        } else if (args[0] == null)
+        } else if (args.Length == 0)
         {
-            
+            initializeTurnier();
+            printSpiele();
         }
 
     }
@@ -69,7 +73,10 @@ public class Turniermanager
 public class Turnier
 {
     private List<Gruppe> gruppen;
-    public getSpielbyId(int id);
+    public getSpielbyId(int id)
+    {
+        
+    }
     public GetAlleSpiele();
 }
 public class Gruppe
@@ -83,12 +90,12 @@ public class Mannschaft
 }
 class Spiel
 {
-    private int id;
-    private DateTime datum;
-    private Mannschaft heimTeam;
-    private Mannschaft auswaertsTeam;
-    private string ergebnis;
-    private Dictionary<string, double> quoten;
+    private int id {get; set;}
+    private DateTime datum {get; set;}
+    private Mannschaft heimTeam {get; set;}
+    private Mannschaft auswaertsTeam {get; set;}
+    private string ergebnis {get; set;}
+    private Dictionary<string, double> quoten {get; set;}
     public void setErgebnis(string score);
 }
 class Benutzer
