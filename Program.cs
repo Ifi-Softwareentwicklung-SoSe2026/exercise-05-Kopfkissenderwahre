@@ -51,6 +51,7 @@ public class Turniermanager
     {
         string json = File.ReadAllText(filepath);
         JsonSerializer.Deserialize(json) ?? throw new InvalidDataException($"JSON-Datei konnte nicht gelesen werden: {filepath}");
+        this.turniertabelle = JsonSerializer.Deserialize<Turnier>(json) ?? throw new InvalidDataException($"JSON-Datei konnte nicht gelesen werden: {filepath}");
     }
     public void initializeTurnier()
     {
@@ -73,7 +74,7 @@ public class Turniermanager
 
 public class Turnier
 {
-    private List<Gruppe> gruppen {get; set;}
+    public List<Gruppe> gruppen {get; set;}
     public Spiel getSpielbyId(int id)
     {
         return gruppen.SelectMany(g => g.teams)
