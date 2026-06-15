@@ -90,21 +90,21 @@ public class Turnier
 }
 public class Gruppe
 {
-    private string name {get; set;}
-    private List<Mannschaft> teams {get; set;}
+    public string name {get; set;}
+    public List<Mannschaft> teams {get; set;}
 }
 public class Mannschaft
 {
-    private string name {get; set;}
+    public string name {get; set;}
 }
 class Spiel
 {
-    private int id {get; set;}
-    private DateTime datum {get; set;}
-    private Mannschaft heimTeam {get; set;}
-    private Mannschaft auswaertsTeam {get; set;}
-    private string ergebnis {get; set;}
-    private Dictionary<string, double> quoten {get; set;}
+    public int id {get; set;}
+    public DateTime datum {get; set;}
+    public Mannschaft heimTeam {get; set;}
+    public Mannschaft auswaertsTeam {get; set;}
+    public string ergebnis {get; set;}
+    public Dictionary<string, double> quoten {get; set;}
     public void setErgebnis(string score)
     {
         this.ergebnis = score;
@@ -112,8 +112,8 @@ class Spiel
 }
 class Benutzer
 {
-    private string name {get; set;}
-    private double guthaben {get; set;}
+    public string name {get; set;}
+    public double guthaben {get; set;}
     public void updateBalance(double amount);
 }
 class Wette
