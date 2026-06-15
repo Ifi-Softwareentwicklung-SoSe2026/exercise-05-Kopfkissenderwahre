@@ -32,7 +32,7 @@ public class Program
         } else if (args.Length == 0)
         {
             manager.initializeTurnier();
-            printSpiele();
+            manager.printSpiele();
         }
 
     }
@@ -74,13 +74,13 @@ public class Turniermanager
 public class Turnier
 {
     private List<Gruppe> gruppen;
-    public getSpielbyId(int id)
+    public Spiel getSpielbyId(int id)
     {
         return gruppen.SelectMany(g => g.teams)
                       .SelectMany(t => t.spiele)
                       .FirstOrDefault(s => s.id == id);
     }
-    public GetAlleSpiele()
+    public List<Spiel> GetAlleSpiele()
     {
         return gruppen.SelectMany(g => g.teams)
                       .SelectMany(t => t.spiele)
