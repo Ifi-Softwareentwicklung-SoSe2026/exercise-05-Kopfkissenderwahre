@@ -137,15 +137,11 @@ public class Turnier
     public List<Gruppe> gruppen {get; set;} = new List<Gruppe>();
     public Spiel getSpielbyId(int id)
     {
-        return gruppen.SelectMany(g => g.teams)
-                      .SelectMany(t => t.Spiele)
-                      .FirstOrDefault(s => s.id == id);
+        return this.GetAlleSpiele().FirstOrDefault(s => s.id == id) ?? throw new InvalidDataException($"Spiel mit ID {id} nicht gefunden.");
     }
-    public List<Spiel> GetAlleSpiele()
+    public List<Spiel> GetAlleSpiele() 
     {
-        return gruppen.SelectMany(g => g.teams)
-                      .SelectMany(t => t.Spiele)
-                      .ToList();
+        return new List<Spiel>(); 
     }
 }
 public class Gruppe
@@ -155,8 +151,7 @@ public class Gruppe
 }
 public class Mannschaft
 {
-    public string? name {get; set;}
-}
+    public string? name {get; set;}}
 public class Spiel
 {
     public int id {get; set;}
@@ -170,6 +165,7 @@ public class Spiel
         this.ergebnis = score;
     }
 }
+
 /*
 public class Benutzer
 {
