@@ -40,8 +40,8 @@ public class Program
 
 public class Turniermanager
 {
-    private Turnier turniertabelle {get; set;}
-    private List<Benutzer> benutzerliste;
+    public Turnier turniertabelle {get; set;}
+    public List<Benutzer> benutzerliste;
     public void saveToJson(string filepath)
     {
         var json = JsonSerializer.Serialize(this.turniertabelle, new JsonSerializerOptions { WriteIndented = true });
@@ -50,7 +50,6 @@ public class Turniermanager
     public void loadFromJson(string filepath)
     {
         string json = File.ReadAllText(filepath);
-        JsonSerializer.Deserialize(json) ?? throw new InvalidDataException($"JSON-Datei konnte nicht gelesen werden: {filepath}");
         this.turniertabelle = JsonSerializer.Deserialize<Turnier>(json) ?? throw new InvalidDataException($"JSON-Datei konnte nicht gelesen werden: {filepath}");
     }
     public void initializeTurnier()
@@ -118,9 +117,9 @@ class Benutzer
 }
 class Wette
 {
-    private string typ {get; set;}
-    private double quote {get; set;}
-    private double einsatz {get; set;}
-    private Boolean istAusgewertet {get; set;}
-    private Spiel spiel;
+    public string typ {get; set;}
+    public double quote {get; set;}
+    public double einsatz {get; set;}
+    public Boolean istAusgewertet {get; set;}
+    public Spiel spiel;
 }
