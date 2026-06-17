@@ -146,7 +146,6 @@ public class Gruppe
 public class Mannschaft
 {
     public string? name {get; set;}
-    public List<Spiel> Spiele {get; set;}
 }
 public class Spiel
 {
