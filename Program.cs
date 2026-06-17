@@ -2,6 +2,7 @@ using System.Data;
 using System.Dynamic;
 using System.Collections;
 using System.Diagnostics;
+using System.Security.Cryptography.X509Certificates;
 
 public class Program
 {
@@ -64,10 +65,40 @@ public class Turniermanager
             Console.WriteLine($"{spiel.heimTeam.name} vs {spiel.auswaertsTeam.name}, Spiel-ID: {spiel.id}");
         }
     }
-    public void setQuote(int spielId, string typ, double quote);
-    public double getQuote(int spielId, string typ);
-    public void placeBid(string playerName, int spielId, string typ, double amount);
-    public void setResult(int spielId, string score);
+    public void setQuote(int spielId, string typ, double quote) {
+        var spiel = turniertabelle.GetAlleSpiele().FirstOrDefault(s => s.id == spielId);
+        if (spiel != null)
+        {
+            spiel.quoten[typ] = quote;
+        }
+    }
+    public double getQuote(int spielId, string typ)
+    {
+        var spiel = turniertabelle.GetAlleSpiele().FirstOrDefault(s => s.id == spielId);
+        return spiel?.quoten[typ] ?? 0;
+    }
+    public void placeBid(string playerName, int spielId, string typ, double amount)
+    {
+        var benutzer = benutzerliste.FirstOrDefault(b => b.name == playerName);
+        if (benutzer != null)
+        {
+            double quote = getQuote(spielId, typ);
+            if (quote > 0 && benutzer.guthaben >= amount)
+            {
+                benutzer.updateBalance(-amount);
+                Wette wette = new Wette { typ = typ, quote = quote, einsatz = amount, istAusgewertet = false, spiel = turniertabelle.GetAlleSpiele().FirstOrDefault(s => s.id == spielId) };
+                // Hier könnte die Wette in einer Liste gespeichert werden
+            }
+        }
+    }
+    public void setResult(int spielId, string score) {
+        var spiel = turniertabelle.GetAlleSpiele().FirstOrDefault(s => s.id == spielId);
+        if (spiel != null)
+        {
+            spiel.setErgebnis(score);
+            // Hier könnte die Auswertung der Wetten erfolgen
+        }
+    }
 
 }
 
