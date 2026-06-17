@@ -46,7 +46,6 @@ public class Program
             manager.initializeTurnier();
             manager.printSpiele();
         }
-        manager.loadFromJson("turnier.json");
     }
 }
 
