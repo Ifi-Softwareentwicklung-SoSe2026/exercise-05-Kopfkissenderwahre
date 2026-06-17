@@ -9,6 +9,7 @@ public class Program
     public static void Main(string[] args)
     {
         Turniermanager manager = new Turniermanager();
+        saveToJson("turnier.json");
         if (args[0].ToLower() == "new")
         {
             // intitialisiert Turniertabelle
@@ -35,7 +36,7 @@ public class Program
             manager.initializeTurnier();
             manager.printSpiele();
         }
-
+        manager.loadFromJson("turnier.json");
     }
 }
 
@@ -126,6 +127,7 @@ public class Gruppe
 public class Mannschaft
 {
     public string name {get; set;}
+    public List<Spiel> spiele {get; set;}
 }
 class Spiel
 {
@@ -144,7 +146,9 @@ class Benutzer
 {
     public string name {get; set;}
     public double guthaben {get; set;}
-    public void updateBalance(double amount);
+    public void updateBalance(double amount) {
+        this.guthaben += amount;
+    }
 }
 class Wette
 {
