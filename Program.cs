@@ -20,7 +20,7 @@ public class Program
             manager.loadFromJson("turnier.json");
         }
 
-        if (args.Length == 0)
+        if (args[0].ToLower() == "new")
         {
             // intitialisiert Turniertabelle
             manager.initializeTurnier();
