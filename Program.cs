@@ -57,6 +57,15 @@ public class Turniermanager
     public void initializeTurnier()
     {
         this.turniertabelle = new Turnier();
+        Gruppe gruppeA = new Gruppe { name = "Gruppe A", teams = new List<Mannschaft>() };
+        this.turniertabelle.gruppen.Add(gruppeA);
+        Mannschaft team1 = new Mannschaft { name = "Team 1", spiele = new List<Spiel>() };
+        Mannschaft team2 = new Mannschaft { name = "Team 2", spiele = new List<Spiel>() };
+        gruppeA.teams.Add(team1);
+        gruppeA.teams.Add(team2);
+        Spiel spiel1 = new Spiel { id = 1, datum = DateTime.Now, heimTeam = team1, auswaertsTeam = team2, quoten = new Dictionary<string, double>() };
+        team1.spiele.Add(spiel1);
+        team2.spiele.Add(spiel1);
     }
     public void printSpiele()
     {
@@ -105,7 +114,7 @@ public class Turniermanager
 
 public class Turnier
 {
-    public List<Gruppe> gruppen {get; set;}
+    public List<Gruppe> gruppen {get; set;} = new List<Gruppe>();
     public Spiel getSpielbyId(int id)
     {
         return gruppen.SelectMany(g => g.teams)
