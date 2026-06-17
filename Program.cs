@@ -52,7 +52,7 @@ public class Program
 public class Turniermanager
 {
     public Turnier turniertabelle {get; set;}
-    public List<Benutzer> benutzerliste;
+    public List<Benutzer>? benutzerliste;
     public void saveToJson(string filepath)
     {
         var json = JsonSerializer.Serialize(this.turniertabelle, new JsonSerializerOptions { WriteIndented = true });
@@ -139,22 +139,22 @@ public class Turnier
 }
 public class Gruppe
 {
-    public string name {get; set;}
+    public string? name {get; set;}
     public List<Mannschaft> teams {get; set;}
 }
 public class Mannschaft
 {
-    public string name {get; set;}
+    public string? name {get; set;}
     public List<Spiel> Spiele {get; set;}
 }
 public class Spiel
 {
     public int id {get; set;}
     public DateTime datum {get; set;}
-    public Mannschaft heimTeam {get; set;}
-    public Mannschaft auswaertsTeam {get; set;}
-    public string ergebnis {get; set;}
-    public Dictionary<string, double> quoten {get; set;}
+    public Mannschaft? heimTeam {get; set;}
+    public Mannschaft? auswaertsTeam {get; set;}
+    public string? ergebnis {get; set;}
+    public Dictionary<string, double>? quoten {get; set;}
     public void setErgebnis(string score)
     {
         this.ergebnis = score;
@@ -162,7 +162,7 @@ public class Spiel
 }
 public class Benutzer
 {
-    public string name {get; set;}
+    public string? name {get; set;}
     public double guthaben {get; set;}
     public void updateBalance(double amount) {
         this.guthaben += amount;
@@ -174,5 +174,5 @@ public class Wette
     public double quote {get; set;}
     public double einsatz {get; set;}
     public Boolean istAusgewertet {get; set;}
-    public Spiel spiel;
+    public Spiel? spiel;
 }
