@@ -53,11 +53,12 @@ public class Program
 public class Turniermanager
 {
     public Turnier turniertabelle {get; set;}
-    public List<Benutzer>? benutzerliste;
+    //public List<Benutzer>? benutzerliste;
     public void saveToJson(string filepath)
     {
         var json = JsonSerializer.Serialize(this.turniertabelle, new JsonSerializerOptions { WriteIndented = true });
         File.WriteAllText(filepath, json);
+        
     }
     public void loadFromJson(string filepath)
     {
@@ -97,20 +98,20 @@ public class Turniermanager
         var spiel = turniertabelle.GetAlleSpiele().FirstOrDefault(s => s.id == spielId);
         return spiel?.quoten[typ] ?? 0;
     }
-    public void placeBid(string playerName, int spielId, string typ, double amount)
-    {
-        var benutzer = benutzerliste.FirstOrDefault(b => b.name == playerName);
-        if (benutzer != null)
-        {
-            double quote = getQuote(spielId, typ);
-            if (quote > 0 && benutzer.guthaben >= amount)
-            {
-                benutzer.updateBalance(-amount);
-                Wette wette = new Wette { typ = typ, quote = quote, einsatz = amount, istAusgewertet = false, spiel = turniertabelle.GetAlleSpiele().FirstOrDefault(s => s.id == spielId) };
-                // Hier könnte die Wette in einer Liste gespeichert werden
-            }
-        }
-    }
+    // public void placeBid(string playerName, int spielId, string typ, double amount)
+    // {
+    //     var benutzer = benutzerliste.FirstOrDefault(b => b.name == playerName);
+    //     if (benutzer != null)
+    //     {
+    //         double quote = getQuote(spielId, typ);
+    //         if (quote > 0 && benutzer.guthaben >= amount)
+    //         {
+    //             benutzer.updateBalance(-amount);
+    //             Wette wette = new Wette { typ = typ, quote = quote, einsatz = amount, istAusgewertet = false, spiel = turniertabelle.GetAlleSpiele().FirstOrDefault(s => s.id == spielId) };
+    //             // Hier könnte die Wette in einer Liste gespeichert werden
+    //         }
+    //     }
+    // }
     public void setResult(int spielId, string score) {
         var spiel = turniertabelle.GetAlleSpiele().FirstOrDefault(s => s.id == spielId);
         if (spiel != null)
@@ -160,6 +161,7 @@ public class Spiel
         this.ergebnis = score;
     }
 }
+/*
 public class Benutzer
 {
     public string? name {get; set;}
@@ -176,3 +178,4 @@ public class Wette
     public Boolean istAusgewertet {get; set;}
     public Spiel? spiel;
 }
+*/
