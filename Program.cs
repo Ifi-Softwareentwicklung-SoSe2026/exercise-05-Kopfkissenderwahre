@@ -24,6 +24,7 @@ public class Program
         {
             // intitialisiert Turniertabelle
             manager.initializeTurnier();
+            manager.saveToJson("turnier.json");
 
         } else if (args[0].ToLower() == "print") 
         {
