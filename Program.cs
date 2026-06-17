@@ -148,6 +148,7 @@ public class Gruppe
 {
     public string? name {get; set;}
     public List<Mannschaft> teams {get; set;}
+    public List<Spiel> spiele {get; set;} = new List<Spiel>();
 }
 public class Mannschaft
 {
