@@ -1,3 +1,8 @@
+using System;
+using System.IO;
+using System.Linq;
+using System.Collections.Generic;
+using System.Text.Json;
 using System.Data;
 using System.Dynamic;
 using System.Collections;
@@ -9,8 +14,13 @@ public class Program
     public static void Main(string[] args)
     {
         Turniermanager manager = new Turniermanager();
-        saveToJson("turnier.json");
-        if (args[0].ToLower() == "new")
+        // load existing data if present
+        if (File.Exists("turnier.json"))
+        {
+            manager.loadFromJson("turnier.json");
+        }
+
+        if (args.Length == 0)
         {
             // intitialisiert Turniertabelle
             manager.initializeTurnier();
@@ -59,13 +69,13 @@ public class Turniermanager
         this.turniertabelle = new Turnier();
         Gruppe gruppeA = new Gruppe { name = "Gruppe A", teams = new List<Mannschaft>() };
         this.turniertabelle.gruppen.Add(gruppeA);
-        Mannschaft team1 = new Mannschaft { name = "Team 1", spiele = new List<Spiel>() };
-        Mannschaft team2 = new Mannschaft { name = "Team 2", spiele = new List<Spiel>() };
+        Mannschaft team1 = new Mannschaft { name = "Team 1", Spiele = new List<Spiel>() };
+        Mannschaft team2 = new Mannschaft { name = "Team 2", Spiele = new List<Spiel>() };
         gruppeA.teams.Add(team1);
         gruppeA.teams.Add(team2);
         Spiel spiel1 = new Spiel { id = 1, datum = DateTime.Now, heimTeam = team1, auswaertsTeam = team2, quoten = new Dictionary<string, double>() };
-        team1.spiele.Add(spiel1);
-        team2.spiele.Add(spiel1);
+        team1.Spiele.Add(spiel1);
+        team2.Spiele.Add(spiel1);
     }
     public void printSpiele()
     {
@@ -118,13 +128,13 @@ public class Turnier
     public Spiel getSpielbyId(int id)
     {
         return gruppen.SelectMany(g => g.teams)
-                      .SelectMany(t => t.spiele)
+                      .SelectMany(t => t.Spiele)
                       .FirstOrDefault(s => s.id == id);
     }
     public List<Spiel> GetAlleSpiele()
     {
         return gruppen.SelectMany(g => g.teams)
-                      .SelectMany(t => t.spiele)
+                      .SelectMany(t => t.Spiele)
                       .ToList();
     }
 }
@@ -136,9 +146,9 @@ public class Gruppe
 public class Mannschaft
 {
     public string name {get; set;}
-    public List<Spiel> spiele {get; set;}
+    public List<Spiel> Spiele {get; set;}
 }
-class Spiel
+public class Spiel
 {
     public int id {get; set;}
     public DateTime datum {get; set;}
@@ -151,7 +161,7 @@ class Spiel
         this.ergebnis = score;
     }
 }
-class Benutzer
+public class Benutzer
 {
     public string name {get; set;}
     public double guthaben {get; set;}
@@ -159,7 +169,7 @@ class Benutzer
         this.guthaben += amount;
     }
 }
-class Wette
+public class Wette
 {
     public string typ {get; set;}
     public double quote {get; set;}
