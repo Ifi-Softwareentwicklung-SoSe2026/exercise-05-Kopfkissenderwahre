@@ -58,7 +58,7 @@ public class Turniermanager
     {
         var json = JsonSerializer.Serialize(this.turniertabelle, new JsonSerializerOptions { WriteIndented = true });
         File.WriteAllText(filepath, json);
-        
+
     }
     public void loadFromJson(string filepath)
     {
@@ -70,13 +70,22 @@ public class Turniermanager
         this.turniertabelle = new Turnier();
         Gruppe gruppeA = new Gruppe { name = "Gruppe A", teams = new List<Mannschaft>() };
         this.turniertabelle.gruppen.Add(gruppeA);
-        Mannschaft team1 = new Mannschaft { name = "Team 1", Spiele = new List<Spiel>() };
-        Mannschaft team2 = new Mannschaft { name = "Team 2", Spiele = new List<Spiel>() };
-        gruppeA.teams.Add(team1);
-        gruppeA.teams.Add(team2);
-        Spiel spiel1 = new Spiel { id = 1, datum = DateTime.Now, heimTeam = team1, auswaertsTeam = team2, quoten = new Dictionary<string, double>() };
-        team1.Spiele.Add(spiel1);
-        team2.Spiele.Add(spiel1);
+        Mannschaft team1 = new Mannschaft { name = "Team 1" };
+        Mannschaft team2 = new Mannschaft { name = "Team 2" };
+        Mannschaft team3 = new Mannschaft { name = "Team 3" };
+        Mannschaft team4 = new Mannschaft { name = "Team 4" };
+        gruppeA.teams.AddRange(new[] { team1, team2, team3, team4 });
+        int spielId = 1;
+        foreach (var heimTeam in gruppeA.teams)
+        {
+            foreach (var auswaertsTeam in gruppeA.teams)            {
+                if (heimTeam != auswaertsTeam)
+                {
+                    Spiel spiel = new Spiel { id = spielId++, datum = DateTime.Now, heimTeam = heimTeam, auswaertsTeam = auswaertsTeam, quoten = new Dictionary<string, double>() };
+
+                }
+            }
+        }
     }
     public void printSpiele()
     {
