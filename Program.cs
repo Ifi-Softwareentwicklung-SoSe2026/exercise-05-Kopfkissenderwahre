@@ -83,9 +83,11 @@ public class Turniermanager
                 {
                     Spiel spiel = new Spiel { id = spielId++, datum = DateTime.Now, heimTeam = heimTeam, auswaertsTeam = auswaertsTeam, quoten = new Dictionary<string, double>() };
 
+                    turniertabelle.gruppen[0].spiele.Add(spiel);
                 }
             }
         }
+        
     }
     public void printSpiele()
     {
